@@ -1,26 +1,22 @@
-USE CollegeDB;
+DELIMITER //
 
-DROP FUNCTION IF EXISTS CountStudentsByDepartment;
-
-DELIMITER $$
-
-CREATE FUNCTION CountStudentsByDepartment(
-    p_department_id INT
+CREATE PROCEDURE InsertStudent(
+    IN p_StudentID INT,
+    IN p_StudentName VARCHAR(100),
+    IN p_Marks INT,
+    IN p_DepartmentID INT
 )
-RETURNS INT
-DETERMINISTIC
-READS SQL DATA
 BEGIN
-
-    DECLARE student_count INT;
-
-    -- Count students belonging to the given department
-
-    -- Return the count
-
-END $$
+    INSERT INTO Student
+    VALUES (
+        p_StudentID,
+        p_StudentName,
+        p_Marks,
+        p_DepartmentID
+    );
+END //
 
 DELIMITER ;
+CALL InsertStudent(105, 'Karthik', 78, 1);
 
--- Test
-SELECT CountStudentsByDepartment(1) AS StudentCount;
+SELECT * FROM Student;
